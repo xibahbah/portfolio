@@ -181,6 +181,7 @@ var FUH_IMG = "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAABgYAAAO6CAYAAABUmey
     display: flex; flex-direction: row; gap: 14px;
     align-items: center;
   }
+  #socials a { display: flex; align-items: center; }
   .social-btn {
     width: 28px; height: 28px;
     cursor: pointer;
@@ -190,8 +191,9 @@ var FUH_IMG = "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAABgYAAAO6CAYAAABUmey
     stroke: #fff;
     stroke-width: 1.5;
     filter: drop-shadow(0 2px 6px rgba(0,0,0,0.5));
+    pointer-events: none;
   }
-  .social-btn:hover { opacity: 0.4; }
+  #socials a:hover .social-btn { opacity: 0.4; }
 
   /* Copyright */
   #copy {
@@ -332,7 +334,7 @@ const sections = {
   photo:      { label: 'Photo',       images: [null, null, null, null, null, null] },
   editorial:  { label: 'Editorial',   images: [null, null, null] },
   projecting: { label: 'Projecting',  images: [null, null] },
-  commercial: { label: 'Commercial',  images: [null, null, null] },
+  commercial: { label: 'Commercial',  images: [null, null, null], url: 'https://xibahbah.github.io/commercial/contact.html' },
   digital:    { label: 'Digital Work',images: [null, null] },
   books:      { label: 'Books',       images: [null] },
 };
@@ -418,8 +420,8 @@ navLinks.forEach(link => {
       window.location.href = 'editorial.html' + window.location.search;
       return;
     }
-    if (sec === 'commercial') {
-      window.location.href = 'commercial.html' + window.location.search;
+    if (sections[sec]?.url) {
+      window.location.href = sections[sec].url;
       return;
     }
     if (sec === 'contact') {
