@@ -181,6 +181,7 @@ var FUH_IMG = "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAABgYAAAO6CAYAAABUmey
     display: flex; flex-direction: row; gap: 14px;
     align-items: center;
   }
+  #socials a { display: flex; align-items: center; }
   .social-btn {
     width: 28px; height: 28px;
     cursor: pointer;
@@ -190,8 +191,9 @@ var FUH_IMG = "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAABgYAAAO6CAYAAABUmey
     stroke: #fff;
     stroke-width: 1.5;
     filter: drop-shadow(0 2px 6px rgba(0,0,0,0.5));
+    pointer-events: none;
   }
-  .social-btn:hover { opacity: 0.4; }
+  #socials a:hover .social-btn { opacity: 0.4; }
 
   /* Copyright */
   #copy {
