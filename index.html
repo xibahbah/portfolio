@@ -181,7 +181,7 @@ var FUH_IMG = "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAABgYAAAO6CAYAAABUmey
     display: flex; flex-direction: row; gap: 14px;
     align-items: center;
   }
-  #socials a { display: flex; align-items: center; }
+  #socials a { display: flex; align-items: center; width: 28px; height: 28px; }
   .social-btn {
     width: 28px; height: 28px;
     cursor: pointer;
@@ -191,7 +191,7 @@ var FUH_IMG = "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAABgYAAAO6CAYAAABUmey
     stroke: #fff;
     stroke-width: 1.5;
     filter: drop-shadow(0 2px 6px rgba(0,0,0,0.5));
-    pointer-events: none;
+    pointer-events: auto;
   }
   #socials a:hover .social-btn { opacity: 0.4; }
 
@@ -302,15 +302,19 @@ var FUH_IMG = "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAABgYAAAO6CAYAAABUmey
   </nav>
 
   <div id="socials">
-    <svg class="social-btn" onclick="window.location.href='mailto:xikeith0901@gmail.com'" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
-      <rect x="2" y="5" width="16" height="11" rx="0.5" stroke="white" stroke-width="2" fill="none"/>
-      <polyline points="2,5 10,12 18,5" stroke="white" stroke-width="1.2" fill="none"/>
-    </svg>
-    <svg class="social-btn" onclick="window.open('https://instagram.com/keit_hgong','_blank')" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
-      <rect x="3" y="3" width="14" height="14" rx="3.5" stroke="white" stroke-width="2" fill="none"/>
-      <circle cx="10" cy="10" r="3.2" stroke="white" stroke-width="1.2" fill="none"/>
-      <circle cx="14.5" cy="5.5" r="0.8" fill="white" stroke="none"/>
-    </svg>
+    <a href="mailto:xikeith0901@gmail.com" aria-label="Email Keith Gong">
+      <svg class="social-btn" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+        <rect x="2" y="5" width="16" height="11" rx="0.5" stroke="white" stroke-width="2" fill="none"/>
+        <polyline points="2,5 10,12 18,5" stroke="white" stroke-width="1.2" fill="none"/>
+      </svg>
+    </a>
+    <a href="https://instagram.com/keit_hgong" target="_blank" rel="noopener" aria-label="Instagram">
+      <svg class="social-btn" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+        <rect x="3" y="3" width="14" height="14" rx="3.5" stroke="white" stroke-width="2" fill="none"/>
+        <circle cx="10" cy="10" r="3.2" stroke="white" stroke-width="1.2" fill="none"/>
+        <circle cx="14.5" cy="5.5" r="0.8" fill="white" stroke="none"/>
+      </svg>
+    </a>
   </div>
 
   <div id="copy" style="letter-spacing: 2px; padding: 0px">All content copyright the artist.<br>No commercial use without express written permission.</div>
