@@ -33,7 +33,9 @@ var FUH_IMG = "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAABgYAAAO6CAYAAABUmey
   #hero::after {
     content: '';
     position: absolute; inset: 0;
-    background: linear-gradient(to right, rgba(0,0,0,0.18) 0%, transparent 60%);
+    background:
+      linear-gradient(to right, rgba(0,0,0,var(--hero-overlay,0.26)) 0%, rgba(0,0,0,var(--hero-overlay-soft,0.17)) 28%, transparent 64%),
+      linear-gradient(to bottom, rgba(0,0,0,0.08) 0%, transparent 24%, transparent 72%, rgba(0,0,0,0.16) 100%);
   }
 
   /* ── GALLERY OVERLAY ── */
@@ -892,7 +894,7 @@ Object.assign(window, {
 const TWEAK_DEFAULTS = /*EDITMODE-BEGIN*/{
   "nameSize": 40,
   "navSize": 26,
-  "overlayOpacity": 0.18,
+  "overlayOpacity": 0.26,
   "creditOpacity": 0.6
 }/*EDITMODE-END*/;
 
@@ -902,8 +904,10 @@ function TweaksApp() {
   React.useEffect(() => {
     document.getElementById('name').style.fontSize = t.nameSize + 'px';
     document.querySelectorAll('#nav a').forEach(a => a.style.fontSize = t.navSize + 'px');
+    document.documentElement.style.setProperty('--hero-overlay', t.overlayOpacity);
+    document.documentElement.style.setProperty('--hero-overlay-soft', t.overlayOpacity * 0.65);
     document.getElementById('credits').style.opacity = t.creditOpacity;
-  }, [t.nameSize, t.navSize, t.creditOpacity]);
+  }, [t.nameSize, t.navSize, t.overlayOpacity, t.creditOpacity]);
 
   return (
     <TweaksPanel>
