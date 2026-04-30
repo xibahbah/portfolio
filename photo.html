@@ -130,8 +130,6 @@ PHOTOS.forEach((src, i) => {
   const d = document.createElement('div'); d.className = 'photo-item';
   const img = document.createElement('img');
   img.src = src.thumb;
-  img.srcset = `${src.thumb} 700w, ${src.full} ${src.width}w`;
-  img.sizes = '(max-width: 820px) 100vw, 33vw';
   img.loading = 'lazy';
   img.decoding = 'async';
   img.alt = '';
