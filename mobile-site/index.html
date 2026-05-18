@@ -24,21 +24,21 @@
     z-index:5;
     background:#0a0a0a;
     border-bottom:1px solid rgba(255,255,255,0.07);
-    padding-top:18px;
+    padding-top:6px;
   }
   .nav-brand{
     --brand-tracking:clamp(7px,2.7vw,11px);
     display:block;
     width:100%;
-    padding:8px 24px 0;
+    padding:6px 24px 0;
     font-size:18px;
     font-weight:400;
     letter-spacing:var(--brand-tracking);
-    text-indent:var(--brand-tracking);
+    text-indent:0;
     text-transform:uppercase;
     color:#fff;
     text-decoration:none;
-    text-align:center;
+    text-align:left;
     line-height:1;
   }
   @media (min-width:540px){.nav-brand{--brand-tracking:13px;font-size:20px;}}
@@ -116,11 +116,11 @@
   #foot{
     padding:48px 24px 36px;
     border-top:1px solid rgba(255,255,255,0.06);
-    font-size:9px;
-    line-height:1.8;
-    letter-spacing:2.5px;
+    font-size:8px;
+    line-height:1.75;
+    letter-spacing:1.6px;
     text-transform:uppercase;
-    color:rgba(255,255,255,0.32);
+    color:rgba(255,255,255,0.34);
     text-align:center;
   }
   /* ── LIGHTBOX ── */
@@ -134,6 +134,21 @@
   }
   #lb.on{display:flex;}
   #lb-top{flex-shrink:0;display:flex;justify-content:flex-end;padding:14px 18px;padding-top:calc(14px + max(54px, env(safe-area-inset-top,0px)));}
+  #lb-loading{
+    position:fixed;
+    left:50%;
+    top:calc(18px + env(safe-area-inset-top,0px));
+    transform:translateX(-50%);
+    z-index:203;
+    opacity:0;
+    pointer-events:none;
+    color:rgba(255,255,255,0.52);
+    font-size:10px;
+    letter-spacing:3px;
+    text-transform:uppercase;
+    transition:opacity 0.16s ease;
+  }
+  #lb-loading.on{opacity:1;}
   #lb-x{
     font-size:9px;
     letter-spacing:3px;
@@ -170,16 +185,15 @@
   .lb-btn{
     flex:1;
     border:0;
-    background:rgba(255,255,255,0.04);
-    color:rgba(255,255,255,0.65);
-    font:300 11px/1 'Helvetica Neue',Helvetica,Arial,sans-serif;
-    letter-spacing:3.5px;
+    background:transparent;
+    color:rgba(255,255,255,0.58);
+    font:300 15px/1 'Helvetica Neue',Helvetica,Arial,sans-serif;
+    letter-spacing:4px;
     text-transform:uppercase;
     padding:18px 12px;
     cursor:pointer;
-    border-radius:1px;
   }
-  .lb-btn:active{background:rgba(255,255,255,0.1);color:#fff;}
+  .lb-btn:active{color:#fff;}
   #lb-count{
     flex:0 0 auto;
     font-size:9px;
@@ -219,10 +233,13 @@
 <div id="grid"></div>
 
 <div id="foot">
-  All content © the artist<br>No commercial use without express written permission
+  © 2026 Keith Gong. All rights reserved.<br>
+  Images may not be copied, downloaded, reproduced, distributed, or used commercially without written permission.<br>
+  Direct downloads from this website include visible watermarking.
 </div>
 
 <div id="lb" aria-hidden="true">
+  <div id="lb-loading" aria-live="polite">Loading</div>
   <div id="lb-top"><div id="lb-x">Close</div></div>
   <div id="lb-stage"><img id="lb-img" alt=""></div>
   <div id="lb-controls">
@@ -290,13 +307,16 @@ PHOTOS.forEach((src, i) => {
 const lb = document.getElementById('lb');
 const lbImg = document.getElementById('lb-img');
 const lbCount = document.getElementById('lb-count');
+const lbLoading = document.getElementById('lb-loading');
 let currentIdx = 0;
 
 function showPhoto(i){
   currentIdx = (i + PHOTOS.length) % PHOTOS.length;
   const p = PHOTOS[currentIdx];
+  lbLoading.classList.add('on');
   lbImg.src = p.full;
-  lbImg.onerror = function(){ this.src = 'fuh.png'; this.onerror = null; };
+  lbImg.onerror = function(){ lbLoading.classList.remove('on'); this.src = 'fuh.png'; this.onerror = null; };
+  if (lbImg.complete) setTimeout(() => lbLoading.classList.remove('on'), 120);
   lbCount.textContent = (currentIdx+1) + ' / ' + PHOTOS.length;
   lb.classList.add('on');
   lb.setAttribute('aria-hidden','false');
@@ -305,6 +325,7 @@ function showPhoto(i){
 function closePhoto(){
   lb.classList.remove('on');
   lb.setAttribute('aria-hidden','true');
+  lbLoading.classList.remove('on');
   document.body.style.overflow = '';
 }
 function nextPhoto(){ showPhoto(currentIdx + 1); }
@@ -313,6 +334,7 @@ function prevPhoto(){ showPhoto(currentIdx - 1); }
 document.getElementById('lb-x').addEventListener('click', closePhoto);
 document.getElementById('lb-prev').addEventListener('click', prevPhoto);
 document.getElementById('lb-next').addEventListener('click', nextPhoto);
+lbImg.addEventListener('load', () => lbLoading.classList.remove('on'));
 
 // swipe gesture
 let touchX = null, touchY = null;
