@@ -4,6 +4,15 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Keith Gong — Contact</title>
+<script>
+(function(){
+  const params = new URLSearchParams(window.location.search);
+  if (params.has('desktop')) return;
+  const isMobile = window.matchMedia('(max-width: 700px)').matches || /Android|iPhone|iPod|Mobile/i.test(navigator.userAgent);
+  if (!isMobile) return;
+  window.location.replace('mobile-site/contact.html' + window.location.search + window.location.hash);
+})();
+</script>
 <style>
   *,*::before,*::after{margin:0;padding:0;box-sizing:border-box;}
   html,body{background:#0a0a0a;color:#fff;font-family:'Helvetica Neue',Helvetica,Arial,sans-serif;min-height:100vh;}

@@ -7,13 +7,14 @@
 <meta name="theme-color" content="#0a0a0a">
 <style>
   *,*::before,*::after{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent;}
-  html,body{background:#0a0a0a;color:#fff;font-family:'Helvetica Neue',Helvetica,Arial,sans-serif;min-height:100vh;-webkit-font-smoothing:antialiased;}
+  html,body{background:#0a0a0a;color:#fff;font-family:'Helvetica Neue',Helvetica,Arial,sans-serif;width:100%;min-height:100vh;-webkit-font-smoothing:antialiased;overflow-x:hidden;}
+  body{max-width:540px;margin:0 auto;}
 
   #top-nav{position:relative;z-index:5;background:#0a0a0a;border-bottom:1px solid rgba(255,255,255,0.07);padding-top:max(54px, env(safe-area-inset-top,0px));}
-  .nav-brand{display:block;padding:6px 24px 0;font-size:18px;font-weight:400;letter-spacing:11px;text-transform:uppercase;color:#fff;text-decoration:none;text-align:center;line-height:1;}
-  @media (min-width:540px){.nav-brand{font-size:20px;letter-spacing:13px;}}
-  .nav-links{display:flex;align-items:center;justify-content:space-between;gap:4px;padding:14px 18px 18px;border-top:1px solid rgba(255,255,255,0.06);margin-top:18px;}
-  .nav-links a{font-size:9.5px;letter-spacing:2.2px;text-transform:uppercase;color:rgba(255,255,255,0.42);text-decoration:none;white-space:nowrap;padding:6px 4px;}
+  .nav-brand{--brand-tracking:clamp(7px,2.7vw,11px);display:block;width:100%;padding:6px 24px 0;font-size:18px;font-weight:400;letter-spacing:var(--brand-tracking);text-indent:var(--brand-tracking);text-transform:uppercase;color:#fff;text-decoration:none;text-align:center;line-height:1;}
+  @media (min-width:540px){.nav-brand{--brand-tracking:13px;font-size:20px;}}
+  .nav-links{display:flex;align-items:center;justify-content:center;flex-wrap:wrap;gap:6px 8px;padding:14px 8px 18px;border-top:1px solid rgba(255,255,255,0.06);margin-top:18px;}
+  .nav-links a{flex:0 0 auto;font-size:8px;letter-spacing:0.9px;text-transform:uppercase;color:rgba(255,255,255,0.42);text-decoration:none;white-space:nowrap;padding:6px 2px;}
   .nav-links a.active{color:#fff;}
 
   .auth-note{padding:12px 24px 11px;border-bottom:1px solid rgba(255,255,255,0.05);font-size:9px;letter-spacing:2.5px;text-transform:uppercase;color:rgba(255,255,255,0.26);text-align:center;}
@@ -54,8 +55,13 @@
   #ss-count{flex-shrink:0;text-align:center;padding:10px 12px 14px;padding-bottom:calc(10px + env(safe-area-inset-bottom,0px));font-size:9px;letter-spacing:3px;color:rgba(255,255,255,0.36);}
   /* tap zones */
 
+  @media (max-width:360px){
+    .nav-links{gap:6px 6px;}
+    .nav-links a{font-size:7.5px;letter-spacing:0.6px;}
+  }
+
   @media (min-width:540px){
-    body{max-width:540px;margin:0 auto;border-left:1px solid rgba(255,255,255,0.04);border-right:1px solid rgba(255,255,255,0.04);}
+    body{border-left:1px solid rgba(255,255,255,0.04);border-right:1px solid rgba(255,255,255,0.04);}
     .nav-links a{font-size:10px;letter-spacing:3px;}
     #ss{max-width:540px;left:50%;transform:translateX(-50%);}
   }

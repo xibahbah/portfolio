@@ -4,6 +4,25 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Keith Gong</title>
+<script>
+(function(){
+  const params = new URLSearchParams(window.location.search);
+  if (params.has('desktop')) return;
+  const isMobile = window.matchMedia('(max-width: 700px)').matches || /Android|iPhone|iPod|Mobile/i.test(navigator.userAgent);
+  if (!isMobile) return;
+  const pages = {
+    'index.html': 'mobile-site/index.html',
+    'photo.html': 'mobile-site/index.html',
+    'editorial.html': 'mobile-site/editorial.html',
+    'commercial.html': 'mobile-site/commercial.html',
+    'contact.html': 'mobile-site/contact.html',
+    'cv.html': 'mobile-site/cv.html',
+    '': 'mobile-site/index.html'
+  };
+  const file = (window.location.pathname.split('/').pop() || '').toLowerCase();
+  window.location.replace((pages[file] || 'mobile-site/index.html') + window.location.search + window.location.hash);
+})();
+</script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Helvetica+Neue:wght@300;400&display=swap" rel="stylesheet">
 <script src="https://unpkg.com/react@18.3.1/umd/react.development.js" integrity="sha384-hD6/rw4ppMLGNu3tX5cjIb+uRZ7UkRJ6BPkLpg4hAu/6onKUg4lLsHAs9EBPT82L" crossorigin="anonymous"></script>

@@ -10,10 +10,13 @@
   html,body{
     background:#0a0a0a;color:#fff;
     font-family:'Helvetica Neue',Helvetica,Arial,sans-serif;
+    width:100%;
     min-height:100vh;
     -webkit-font-smoothing:antialiased;
     overscroll-behavior-y:contain;
+    overflow-x:hidden;
   }
+  body{max-width:540px;margin:0 auto;}
 
   /* ── TOP NAV (NOT sticky, name + links, reserves dynamic-island space) ── */
   #top-nav{
@@ -23,25 +26,41 @@
     border-bottom:1px solid rgba(255,255,255,0.07);
     padding-top:max(54px, env(safe-area-inset-top,0px));
   }
-  .nav-brand{display:block;padding:8px 24px 0;font-size:18px;font-weight:400;letter-spacing:11px;text-transform:uppercase;color:#fff;text-decoration:none;text-align:center;line-height:1;}
-  @media (min-width:540px){.nav-brand{font-size:20px;letter-spacing:13px;}}
+  .nav-brand{
+    --brand-tracking:clamp(7px,2.7vw,11px);
+    display:block;
+    width:100%;
+    padding:8px 24px 0;
+    font-size:18px;
+    font-weight:400;
+    letter-spacing:var(--brand-tracking);
+    text-indent:var(--brand-tracking);
+    text-transform:uppercase;
+    color:#fff;
+    text-decoration:none;
+    text-align:center;
+    line-height:1;
+  }
+  @media (min-width:540px){.nav-brand{--brand-tracking:13px;font-size:20px;}}
   .nav-links{
     display:flex;
     align-items:center;
-    justify-content:space-between;
-    gap:4px;
-    padding:14px 18px 16px;
+    justify-content:center;
+    flex-wrap:wrap;
+    gap:6px 8px;
+    padding:14px 8px 16px;
     margin-top:18px;
     border-top:1px solid rgba(255,255,255,0.06);
   }
   .nav-links a{
-    font-size:9.5px;
-    letter-spacing:2.2px;
+    flex:0 0 auto;
+    font-size:8px;
+    letter-spacing:0.9px;
     text-transform:uppercase;
     color:rgba(255,255,255,0.42);
     text-decoration:none;
     white-space:nowrap;
-    padding:6px 4px;
+    padding:6px 2px;
     transition:color 0.2s;
   }
   .nav-links a.active{color:#fff;}
@@ -61,15 +80,19 @@
   /* ── PHOTO GRID (2 COL MASONRY) ── */
   #grid{
     display:grid;
-    grid-template-columns:1fr 1fr;
+    grid-template-columns:repeat(2,minmax(0,1fr));
+    width:100%;
+    max-width:100%;
     gap:2px;
     padding:2px;
     align-items:start;
+    overflow:hidden;
   }
   .col{
     display:flex;
     flex-direction:column;
     gap:2px;
+    min-width:0;
   }
   .photo-item{
     width:100%;
@@ -80,9 +103,10 @@
   }
   .photo-item img{
     width:100%;
+    max-width:100%;
     height:auto;
     display:block;
-    object-fit:cover;
+    object-fit:contain;
     opacity:0.95;
     transition:opacity 0.3s;
   }
@@ -99,11 +123,6 @@
     color:rgba(255,255,255,0.32);
     text-align:center;
   }
-  #foot .foot-credits{
-    margin-top:18px;
-    color:rgba(255,255,255,0.22);
-  }
-
   /* ── LIGHTBOX ── */
   #lb{
     position:fixed;inset:0;
@@ -170,9 +189,14 @@
     text-align:center;
   }
 
+  @media (max-width: 360px){
+    .nav-links{gap:6px 6px;}
+    .nav-links a{font-size:7.5px;letter-spacing:0.6px;}
+  }
+
   /* Larger screens still get the mobile feel (capped) */
   @media (min-width: 540px){
-    body{max-width:540px;margin:0 auto;border-left:1px solid rgba(255,255,255,0.04);border-right:1px solid rgba(255,255,255,0.04);}
+    body{border-left:1px solid rgba(255,255,255,0.04);border-right:1px solid rgba(255,255,255,0.04);}
     .nav-links a{font-size:10px;letter-spacing:3px;}
   }
 </style>
@@ -196,9 +220,6 @@
 
 <div id="foot">
   All content © the artist<br>No commercial use without express written permission
-  <div class="foot-credits">
-    Model · Alexandra Dologa<br>Make Up · Pai Peng
-  </div>
 </div>
 
 <div id="lb" aria-hidden="true">
