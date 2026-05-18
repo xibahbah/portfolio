@@ -226,28 +226,13 @@ var FUH_IMG = "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAABgYAAAO6CAYAAABUmey
     position: absolute;
     bottom: clamp(28px, 4.2vw, 52px);
     left: clamp(28px, 2.55vw, 52px);
-    font-size: clamp(13px, 1vw, 20px);
+    font-size: clamp(9px, 0.72vw, 13px);
     color: #fff;
     font-weight: 300;
     line-height: 1.55;
-    letter-spacing: 0.16em;
+    letter-spacing: 0.12em;
     text-transform: uppercase;
     text-shadow: 0 2px 10px rgba(0,0,0,0.4);
-  }
-
-  /* Credits */
-  #credits {
-    position: absolute;
-    bottom: clamp(28px, 2.35vw, 42px);
-    right: clamp(24px, 2.45vw, 50px);
-    font-size: clamp(13px, 1vw, 20px);
-    color: #fff;
-    font-weight: 300;
-    line-height: 1.5;
-    letter-spacing: 0.16em;
-    text-transform: uppercase;
-    text-align: right;
-    text-shadow: 0 2px 10px rgba(0,0,0,0.55);
   }
 
   /* Back button */
@@ -326,8 +311,7 @@ var FUH_IMG = "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAABgYAAAO6CAYAAABUmey
       height: 32px;
     }
 
-    #copy,
-    #credits {
+    #copy {
       font-size: 9px;
       line-height: 1.55;
       letter-spacing: 0.08em;
@@ -340,12 +324,6 @@ var FUH_IMG = "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAABgYAAAO6CAYAAABUmey
       bottom: 64px;
     }
 
-    #credits {
-      left: 24px;
-      right: auto;
-      bottom: 22px;
-      text-align: left;
-    }
   }
 </style>
 </head>
@@ -407,12 +385,7 @@ var FUH_IMG = "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAABgYAAAO6CAYAAABUmey
     </a>
   </div>
 
-  <div id="copy">© 2026 Keith Gong. All rights reserved.<br>Images may not be copied, downloaded, reproduced, distributed, or used commercially without written permission.</div>
-
-  <div id="credits">
-    Model: Alexandra Dologa<br>
-    Make Up: Pai Peng
-  </div>
+  <div id="copy">© 2026 Keith Gong. All rights reserved.<br>No unauthorized reproduction or commercial use.</div>
 
   <div id="back-btn">← Back</div>
 </div>
@@ -982,8 +955,7 @@ Object.assign(window, {
 const TWEAK_DEFAULTS = /*EDITMODE-BEGIN*/{
   "nameSize": 56,
   "navSize": 40,
-  "overlayOpacity": 0.18,
-  "creditOpacity": 1
+  "overlayOpacity": 0.18
 }/*EDITMODE-END*/;
 
 function TweaksApp() {
@@ -994,8 +966,7 @@ function TweaksApp() {
     document.querySelectorAll('#nav a').forEach(a => a.style.fontSize = t.navSize + 'px');
     document.documentElement.style.setProperty('--hero-overlay', t.overlayOpacity);
     document.documentElement.style.setProperty('--hero-overlay-soft', t.overlayOpacity * 0.65);
-    document.getElementById('credits').style.opacity = t.creditOpacity;
-  }, [t.nameSize, t.navSize, t.overlayOpacity, t.creditOpacity]);
+  }, [t.nameSize, t.navSize, t.overlayOpacity]);
 
   return (
     <TweaksPanel>
@@ -1008,10 +979,6 @@ function TweaksApp() {
       <TweakSection label="Overlay">
         <TweakSlider label="Gradient Darkness" value={t.overlayOpacity} min={0} max={0.6} step={0.01}
           onChange={v => setTweak('overlayOpacity', v)} />
-      </TweakSection>
-      <TweakSection label="Credits">
-        <TweakSlider label="Opacity" value={t.creditOpacity} min={0} max={1} step={0.05}
-          onChange={v => setTweak('creditOpacity', v)} />
       </TweakSection>
     </TweaksPanel>
   );
