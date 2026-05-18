@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Keith Gong — Commercial</title>
+<meta name="theme-color" content="#0a0a0a">
+<style>
+  *,*::before,*::after{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent;}
+  html,body{background:#0a0a0a;color:#fff;font-family:'Helvetica Neue',Helvetica,Arial,sans-serif;min-height:100vh;-webkit-font-smoothing:antialiased;}
+
+  #top-nav{position:relative;z-index:5;background:#0a0a0a;border-bottom:1px solid rgba(255,255,255,0.07);padding-top:max(54px, env(safe-area-inset-top,0px));}
+  .nav-brand{display:block;padding:6px 24px 0;font-size:18px;font-weight:400;letter-spacing:11px;text-transform:uppercase;color:#fff;text-decoration:none;text-align:center;line-height:1;}
+  @media (min-width:540px){.nav-brand{font-size:20px;letter-spacing:13px;}}
+  .nav-links{display:flex;align-items:center;justify-content:space-between;gap:4px;padding:14px 18px 18px;border-top:1px solid rgba(255,255,255,0.06);margin-top:18px;}
+  .nav-links a{font-size:9.5px;letter-spacing:2.2px;text-transform:uppercase;color:rgba(255,255,255,0.42);text-decoration:none;white-space:nowrap;padding:6px 4px;}
+  .nav-links a.active{color:#fff;}
+
+  .auth-note{padding:12px 24px 11px;border-bottom:1px solid rgba(255,255,255,0.05);font-size:9px;letter-spacing:2.5px;text-transform:uppercase;color:rgba(255,255,255,0.26);text-align:center;}
+
+  #projects{padding:8px 0 60px;}
+  .project-row{display:flex;flex-direction:column;padding:28px 22px 40px;border-bottom:1px solid rgba(255,255,255,0.06);gap:22px;}
+  .project-video{order:1;width:100%;}
+  .video-thumb{position:relative;cursor:pointer;overflow:hidden;width:100%;}
+  .video-thumb img{width:100%;height:auto;display:block;opacity:0.92;}
+  .play-btn{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;pointer-events:none;}
+  .play-btn svg{width:54px;height:54px;filter:drop-shadow(0 2px 12px rgba(0,0,0,0.7));}
+  .project-info{order:2;display:flex;flex-direction:column;text-align:center;}
+  .project-num{font-size:9px;letter-spacing:4px;color:rgba(255,255,255,0.32);margin-bottom:14px;text-transform:uppercase;}
+  .project-name{font-size:22px;font-weight:300;letter-spacing:1.5px;line-height:1.25;margin-bottom:10px;}
+  .project-meta{font-size:10px;letter-spacing:3px;color:rgba(255,255,255,0.45);text-transform:uppercase;}
+
+  /* Video modal */
+  #modal{position:fixed;inset:0;background:rgba(0,0,0,0.97);z-index:200;display:none;align-items:center;justify-content:center;flex-direction:column;padding:max(54px, env(safe-area-inset-top,0px)) 18px env(safe-area-inset-bottom,0);}
+  #modal.on{display:flex;}
+  #modal-inner{width:100%;max-width:520px;}
+  #modal-inner video{width:100%;display:block;background:#000;}
+  #modal-close{font-size:10px;letter-spacing:4px;text-transform:uppercase;color:rgba(255,255,255,0.55);cursor:pointer;margin-top:24px;padding:10px 18px;}
+
+  @media (min-width:540px){
+    body{max-width:540px;margin:0 auto;border-left:1px solid rgba(255,255,255,0.04);border-right:1px solid rgba(255,255,255,0.04);}
+    .nav-links a{font-size:10px;letter-spacing:3px;}
+  }
+</style>
+</head>
+<body>
+<div id="top-nav">
+  <a class="nav-brand" href="index.html">Keith Gong</a>
+  <nav class="nav-links">
+    <a href="index.html">Photo</a>
+    <a href="editorial.html">Editorial</a>
+    <a href="commercial.html" class="active">Commercial</a>
+    <a href="contact.html">Contact</a>
+    <a href="cv.html">Profile</a>
+  </nav>
+</div>
+<div class="auth-note">None of this work is AI-generated.</div>
+<div id="projects">
+<div class="project-row">
+    <div class="project-info">
+      <div class="project-num">01</div>
+      <div class="project-name">Ditto</div>
+      <div class="project-meta">Commercial · 2026</div>
+    </div>
+    <div class="project-video">
+      <div class="video-thumb" data-video="../33.mov">
+        <img src="../33-2-2.png" alt="">
+        <div class="play-btn"><svg viewBox="0 0 60 60" fill="none"><circle cx="30" cy="30" r="29" stroke="rgba(255,255,255,0.7)" stroke-width="1.5"/><polygon points="24,18 46,30 24,42" fill="white"/></svg></div>
+      </div>
+    </div>
+  </div>
+<div class="project-row">
+    <div class="project-info">
+      <div class="project-num">02</div>
+      <div class="project-name">Ditto</div>
+      <div class="project-meta">Commercial · 2026</div>
+    </div>
+    <div class="project-video">
+      <div class="video-thumb" data-video="../44.mov">
+        <img src="../44-2.png" alt="">
+        <div class="play-btn"><svg viewBox="0 0 60 60" fill="none"><circle cx="30" cy="30" r="29" stroke="rgba(255,255,255,0.7)" stroke-width="1.5"/><polygon points="24,18 46,30 24,42" fill="white"/></svg></div>
+      </div>
+    </div>
+  </div>
+<div class="project-row">
+    <div class="project-info">
+      <div class="project-num">03</div>
+      <div class="project-name">Ditto</div>
+      <div class="project-meta">Commercial · 2026</div>
+    </div>
+    <div class="project-video">
+      <div class="video-thumb" data-video="../woc.mov">
+        <img src="../woc-2.png" alt="">
+        <div class="play-btn"><svg viewBox="0 0 60 60" fill="none"><circle cx="30" cy="30" r="29" stroke="rgba(255,255,255,0.7)" stroke-width="1.5"/><polygon points="24,18 46,30 24,42" fill="white"/></svg></div>
+      </div>
+    </div>
+  </div>
+<div class="project-row">
+    <div class="project-info">
+      <div class="project-num">04</div>
+      <div class="project-name">Ditto</div>
+      <div class="project-meta">Commercial · 2026</div>
+    </div>
+    <div class="project-video">
+      <div class="video-thumb" data-video="../55.mp4">
+        <img src="../55-2.png" alt="">
+        <div class="play-btn"><svg viewBox="0 0 60 60" fill="none"><circle cx="30" cy="30" r="29" stroke="rgba(255,255,255,0.7)" stroke-width="1.5"/><polygon points="24,18 46,30 24,42" fill="white"/></svg></div>
+      </div>
+    </div>
+  </div>
+</div>
+<div id="modal">
+  <div id="modal-inner"><video id="modal-video" controls playsinline webkit-playsinline></video></div>
+  <div id="modal-close">Close</div>
+</div>
+<script>
+(function(){const qs=window.location.search;if(!qs)return;document.querySelectorAll('a[href$=".html"]').forEach(a=>{const h=a.getAttribute('href');if(h&&!h.includes('?'))a.setAttribute('href',h+qs);});})();
+const modal = document.getElementById('modal');
+const modalVideo = document.getElementById('modal-video');
+function closeModal() { modal.classList.remove('on'); modalVideo.pause(); modalVideo.src = ''; }
+document.querySelectorAll('.video-thumb').forEach(t => {
+  t.addEventListener('click', () => { modalVideo.src = t.dataset.video; modal.classList.add('on'); modalVideo.play(); });
+});
+document.getElementById('modal-close').addEventListener('click', closeModal);
+modal.addEventListener('click', e => { if (e.target === modal) closeModal(); });
+document.addEventListener('keydown', e => { if (e.key === 'Escape') closeModal(); });
+</script>
+</body>
+</html>

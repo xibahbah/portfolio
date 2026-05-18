@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="theme-color" content="#0a0a0a">
+<title>Keith Gong — Profile</title>
+<style>
+  *,*::before,*::after{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent;}
+  html,body{background:#0a0a0a;color:#fff;font-family:'Helvetica Neue',Helvetica,Arial,sans-serif;min-height:100vh;-webkit-font-smoothing:antialiased;}
+
+  #top-nav{position:relative;z-index:5;background:#0a0a0a;border-bottom:1px solid rgba(255,255,255,0.07);padding-top:max(54px, env(safe-area-inset-top,0px));}
+  .nav-brand{display:block;padding:6px 24px 0;font-size:18px;font-weight:400;letter-spacing:11px;text-transform:uppercase;color:#fff;text-decoration:none;text-align:center;line-height:1;}
+  @media (min-width:540px){.nav-brand{font-size:20px;letter-spacing:13px;}}
+  .nav-links{display:flex;align-items:center;justify-content:space-between;gap:4px;padding:14px 18px 18px;border-top:1px solid rgba(255,255,255,0.06);margin-top:18px;}
+  .nav-links a{font-size:9.5px;letter-spacing:2.2px;text-transform:uppercase;color:rgba(255,255,255,0.42);text-decoration:none;white-space:nowrap;padding:6px 4px;}
+  .nav-links a.active{color:#fff;}
+
+  #cv-body{padding:48px 24px 80px;max-width:560px;margin:0 auto;}
+  .cv-section{margin-bottom:56px;}
+  .cv-label{font-size:10px;letter-spacing:5px;text-transform:uppercase;color:rgba(255,255,255,0.36);margin-bottom:24px;padding-bottom:12px;border-bottom:1px solid rgba(255,255,255,0.07);text-align:center;}
+  .cv-row{margin-bottom:32px;}
+  .cv-year{font-size:10px;letter-spacing:3px;color:rgba(255,255,255,0.36);text-transform:uppercase;margin-bottom:10px;text-align:center;}
+  .cv-title{font-size:17px;font-weight:300;letter-spacing:0.5px;line-height:1.35;margin-bottom:8px;text-align:center;}
+  .cv-sub{font-size:10px;letter-spacing:2.5px;color:rgba(255,255,255,0.5);text-transform:uppercase;margin-bottom:14px;text-align:center;line-height:1.6;}
+  .cv-desc{font-size:13px;line-height:1.85;color:rgba(255,255,255,0.55);font-weight:300;}
+  .cv-row:last-child{margin-bottom:0;}
+
+  @media (min-width:540px){
+    body{max-width:540px;margin:0 auto;border-left:1px solid rgba(255,255,255,0.04);border-right:1px solid rgba(255,255,255,0.04);}
+    .nav-links a{font-size:10px;letter-spacing:3px;}
+  }
+</style>
+</head>
+<body>
+<div id="top-nav">
+  <a class="nav-brand" href="index.html">Keith Gong</a>
+  <nav class="nav-links">
+    <a href="index.html">Photo</a>
+    <a href="editorial.html">Editorial</a>
+    <a href="commercial.html">Commercial</a>
+    <a href="contact.html">Contact</a>
+    <a href="cv.html" class="active">Profile</a>
+  </nav>
+</div>
+
+<div id="cv-body">
+  <div class="cv-section">
+    <div class="cv-label">Education</div>
+    <div class="cv-row">
+      <div class="cv-year">2024 — 27</div>
+      <div class="cv-title">University of California, San Diego</div>
+      <div class="cv-sub">B.S. Data Science · Minor in Photography<br>Expected Winter 2027</div>
+    </div>
+  </div>
+
+  <div class="cv-section">
+    <div class="cv-label">Experience</div>
+    <div class="cv-row">
+      <div class="cv-year">2026 —</div>
+      <div class="cv-title">Ditto</div>
+      <div class="cv-sub">Content Team Lead · San Diego, CA</div>
+      <div class="cv-desc">Lead visual production for commercial and social media campaigns. Direct cinematography and on-set execution across short-form shoots, managing camera operation, lighting design, talent direction, and visual storytelling. And post-production review: selects, color, pacing, and final delivery.</div>
+    </div>
+    <div class="cv-row">
+      <div class="cv-year">2025</div>
+      <div class="cv-title">Prada</div>
+      <div class="cv-sub">Retail Operations &amp; Loss Prevention Associate · San Diego, CA</div>
+      <div class="cv-desc">Supported floor-side security at a luxury retail location, maintaining a calm store presence while observing customer flow, protecting merchandise, and assisting daily retail operations.</div>
+    </div>
+  </div>
+</div>
+
+<script>
+(function(){const qs=window.location.search;if(!qs)return;document.querySelectorAll('a[href$=".html"]').forEach(a=>{const h=a.getAttribute('href');if(h&&!h.includes('?'))a.setAttribute('href',h+qs);});})();
+</script>
+</body>
+</html>

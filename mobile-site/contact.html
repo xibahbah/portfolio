@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="theme-color" content="#0a0a0a">
+<title>Keith Gong — Contact</title>
+<style>
+  *,*::before,*::after{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent;}
+  html,body{background:#0a0a0a;color:#fff;font-family:'Helvetica Neue',Helvetica,Arial,sans-serif;min-height:100vh;-webkit-font-smoothing:antialiased;}
+
+  #top-nav{position:relative;z-index:5;background:#0a0a0a;border-bottom:1px solid rgba(255,255,255,0.07);padding-top:max(54px, env(safe-area-inset-top,0px));}
+  .nav-brand{display:block;padding:6px 24px 0;font-size:18px;font-weight:400;letter-spacing:11px;text-transform:uppercase;color:#fff;text-decoration:none;text-align:center;line-height:1;}
+  @media (min-width:540px){.nav-brand{font-size:20px;letter-spacing:13px;}}
+  .nav-links{display:flex;align-items:center;justify-content:space-between;gap:4px;padding:14px 18px 18px;border-top:1px solid rgba(255,255,255,0.06);margin-top:18px;}
+  .nav-links a{font-size:9.5px;letter-spacing:2.2px;text-transform:uppercase;color:rgba(255,255,255,0.42);text-decoration:none;white-space:nowrap;padding:6px 4px;}
+  .nav-links a.active{color:#fff;}
+
+  #contact-body{padding:80px 28px 60px;max-width:520px;margin:0 auto;}
+  .contact-block{margin-bottom:48px;}
+  .contact-label{font-size:10px;letter-spacing:5px;text-transform:uppercase;color:rgba(255,255,255,0.32);margin-bottom:14px;}
+  .contact-val{font-size:18px;font-weight:300;letter-spacing:0.6px;line-height:1.4;}
+  .contact-val a{color:#fff;text-decoration:none;border-bottom:1px solid rgba(255,255,255,0.2);padding-bottom:2px;}
+  .contact-val a:active{border-color:rgba(255,255,255,0.7);}
+
+  @media (min-width:540px){
+    body{max-width:540px;margin:0 auto;border-left:1px solid rgba(255,255,255,0.04);border-right:1px solid rgba(255,255,255,0.04);}
+    .nav-links a{font-size:10px;letter-spacing:3px;}
+  }
+</style>
+</head>
+<body>
+<div id="top-nav">
+  <a class="nav-brand" href="index.html">Keith Gong</a>
+  <nav class="nav-links">
+    <a href="index.html">Photo</a>
+    <a href="editorial.html">Editorial</a>
+    <a href="commercial.html">Commercial</a>
+    <a href="contact.html" class="active">Contact</a>
+    <a href="cv.html">Profile</a>
+  </nav>
+</div>
+
+<div id="contact-body">
+  <div class="contact-block">
+    <div class="contact-label">Email</div>
+    <div class="contact-val"><a href="mailto:xikeith0901@gmail.com">xikeith0901@gmail.com</a></div>
+  </div>
+  <div class="contact-block">
+    <div class="contact-label">Instagram</div>
+    <div class="contact-val"><a href="https://instagram.com/keit_hgong" target="_blank" rel="noopener">@keit_hgong</a></div>
+  </div>
+</div>
+
+<script>
+(function(){const qs=window.location.search;if(!qs)return;document.querySelectorAll('a[href$=".html"]').forEach(a=>{const h=a.getAttribute('href');if(h&&!h.includes('?'))a.setAttribute('href',h+qs);});})();
+</script>
+</body>
+</html>

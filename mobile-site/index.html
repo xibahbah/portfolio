@@ -1,0 +1,324 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="theme-color" content="#0a0a0a">
+<title>Keith Gong</title>
+<style>
+  *,*::before,*::after{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent;}
+  html,body{
+    background:#0a0a0a;color:#fff;
+    font-family:'Helvetica Neue',Helvetica,Arial,sans-serif;
+    min-height:100vh;
+    -webkit-font-smoothing:antialiased;
+    overscroll-behavior-y:contain;
+  }
+
+  /* ── TOP NAV (NOT sticky, name + links, reserves dynamic-island space) ── */
+  #top-nav{
+    position:relative;
+    z-index:5;
+    background:#0a0a0a;
+    border-bottom:1px solid rgba(255,255,255,0.07);
+    padding-top:max(54px, env(safe-area-inset-top,0px));
+  }
+  .nav-brand{display:block;padding:8px 24px 0;font-size:18px;font-weight:400;letter-spacing:11px;text-transform:uppercase;color:#fff;text-decoration:none;text-align:center;line-height:1;}
+  @media (min-width:540px){.nav-brand{font-size:20px;letter-spacing:13px;}}
+  .nav-links{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap:4px;
+    padding:14px 18px 16px;
+    margin-top:18px;
+    border-top:1px solid rgba(255,255,255,0.06);
+  }
+  .nav-links a{
+    font-size:9.5px;
+    letter-spacing:2.2px;
+    text-transform:uppercase;
+    color:rgba(255,255,255,0.42);
+    text-decoration:none;
+    white-space:nowrap;
+    padding:6px 4px;
+    transition:color 0.2s;
+  }
+  .nav-links a.active{color:#fff;}
+  .nav-links a:active{color:#fff;}
+
+  /* ── AUTH NOTE ── */
+  .auth-note{
+    padding:12px 24px 11px;
+    border-bottom:1px solid rgba(255,255,255,0.05);
+    font-size:9px;
+    letter-spacing:2.5px;
+    text-transform:uppercase;
+    color:rgba(255,255,255,0.26);
+    text-align:center;
+  }
+
+  /* ── PHOTO GRID (2 COL MASONRY) ── */
+  #grid{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:2px;
+    padding:2px;
+    align-items:start;
+  }
+  .col{
+    display:flex;
+    flex-direction:column;
+    gap:2px;
+  }
+  .photo-item{
+    width:100%;
+    overflow:hidden;
+    cursor:pointer;
+    background:#111;
+    position:relative;
+  }
+  .photo-item img{
+    width:100%;
+    height:auto;
+    display:block;
+    object-fit:cover;
+    opacity:0.95;
+    transition:opacity 0.3s;
+  }
+  .photo-item:active img{opacity:1;}
+
+  /* ── FOOTER ── */
+  #foot{
+    padding:48px 24px 36px;
+    border-top:1px solid rgba(255,255,255,0.06);
+    font-size:9px;
+    line-height:1.8;
+    letter-spacing:2.5px;
+    text-transform:uppercase;
+    color:rgba(255,255,255,0.32);
+    text-align:center;
+  }
+  #foot .foot-credits{
+    margin-top:18px;
+    color:rgba(255,255,255,0.22);
+  }
+
+  /* ── LIGHTBOX ── */
+  #lb{
+    position:fixed;inset:0;
+    background:#000;
+    z-index:200;
+    display:none;
+    flex-direction:column;
+    touch-action:none;
+  }
+  #lb.on{display:flex;}
+  #lb-top{flex-shrink:0;display:flex;justify-content:flex-end;padding:14px 18px;padding-top:calc(14px + max(54px, env(safe-area-inset-top,0px)));}
+  #lb-x{
+    font-size:9px;
+    letter-spacing:3px;
+    text-transform:uppercase;
+    color:rgba(255,255,255,0.55);
+    cursor:pointer;
+    padding:8px 6px;
+  }
+  #lb-stage{
+    flex:1;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    overflow:hidden;
+    padding:0 12px;
+    position:relative;
+  }
+  #lb-img{
+    max-width:100%;
+    max-height:100%;
+    object-fit:contain;
+    user-select:none;
+    -webkit-user-drag:none;
+  }
+  #lb-controls{
+    flex-shrink:0;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    padding:18px 12px;
+    padding-bottom:calc(18px + env(safe-area-inset-bottom,0px));
+    gap:8px;
+  }
+  .lb-btn{
+    flex:1;
+    border:0;
+    background:rgba(255,255,255,0.04);
+    color:rgba(255,255,255,0.65);
+    font:300 11px/1 'Helvetica Neue',Helvetica,Arial,sans-serif;
+    letter-spacing:3.5px;
+    text-transform:uppercase;
+    padding:18px 12px;
+    cursor:pointer;
+    border-radius:1px;
+  }
+  .lb-btn:active{background:rgba(255,255,255,0.1);color:#fff;}
+  #lb-count{
+    flex:0 0 auto;
+    font-size:9px;
+    letter-spacing:3px;
+    color:rgba(255,255,255,0.4);
+    min-width:48px;
+    text-align:center;
+  }
+
+  /* Larger screens still get the mobile feel (capped) */
+  @media (min-width: 540px){
+    body{max-width:540px;margin:0 auto;border-left:1px solid rgba(255,255,255,0.04);border-right:1px solid rgba(255,255,255,0.04);}
+    .nav-links a{font-size:10px;letter-spacing:3px;}
+  }
+</style>
+</head>
+<body>
+
+<div id="top-nav">
+  <a class="nav-brand" href="index.html">Keith Gong</a>
+  <nav class="nav-links">
+    <a href="index.html" class="active">Photo</a>
+    <a href="editorial.html">Editorial</a>
+    <a href="commercial.html">Commercial</a>
+    <a href="contact.html">Contact</a>
+    <a href="cv.html">Profile</a>
+  </nav>
+</div>
+
+<div class="auth-note">None of this work is AI-generated.</div>
+
+<div id="grid"></div>
+
+<div id="foot">
+  All content © the artist<br>No commercial use without express written permission
+  <div class="foot-credits">
+    Model · Alexandra Dologa<br>Make Up · Pai Peng
+  </div>
+</div>
+
+<div id="lb" aria-hidden="true">
+  <div id="lb-top"><div id="lb-x">Close</div></div>
+  <div id="lb-stage"><img id="lb-img" alt=""></div>
+  <div id="lb-controls">
+    <button class="lb-btn" id="lb-prev" type="button">Prev</button>
+    <div id="lb-count">— / —</div>
+    <button class="lb-btn" id="lb-next" type="button">Next</button>
+  </div>
+</div>
+
+<script>
+// preserve query string token across nav
+(function(){const qs=window.location.search;if(!qs)return;document.querySelectorAll('a[href$=".html"]').forEach(a=>{const h=a.getAttribute('href');if(h&&!h.includes('?'))a.setAttribute('href',h+qs);});})();
+</script>
+
+<script>
+const PHOTOS = [
+  { thumb: "../thumbs/1.png",  full: "../website/1.png"  },
+  { thumb: "../thumbs/2.png",  full: "../website/2.png"  },
+  { thumb: "../thumbs/3.png",  full: "../website/3.png"  },
+  { thumb: "../thumbs/4.png",  full: "../website/4.png"  },
+  { thumb: "../thumbs/5.png",  full: "../website/5.png"  },
+  { thumb: "../thumbs/6.png",  full: "../website/6.png"  },
+  { thumb: "../thumbs/7.png",  full: "../website/7.jpg"  },
+  { thumb: "../thumbs/8.png",  full: "../website/8.png"  },
+  { thumb: "../thumbs/9.png",  full: "../website/9.png"  },
+  { thumb: "../thumbs/10.png", full: "../website/10.png" },
+  { thumb: "../thumbs/11.png", full: "../website/11.png" },
+  { thumb: "../thumbs/12.png", full: "../website/12.png" },
+  { thumb: "../thumbs/13.png", full: "../website/13.png" },
+  { thumb: "../thumbs/14.png", full: "../website/14.png" },
+  { thumb: "../thumbs/15.png", full: "../website/15.png" },
+  { thumb: "../thumbs/16.png", full: "../website/16.png" },
+  { thumb: "../thumbs/17.png", full: "../website/17.png" },
+  { thumb: "../thumbs/18.png", full: "../website/18.jpg" },
+  { thumb: "../thumbs/19.png", full: "../website/19.png" },
+  { thumb: "../thumbs/20.png", full: "../website/20.png" },
+  { thumb: "../thumbs/21.png", full: "../website/21.png" }
+];
+
+const grid = document.getElementById('grid');
+const cols = [0,1].map(() => {
+  const c = document.createElement('div');
+  c.className = 'col';
+  grid.appendChild(c);
+  return c;
+});
+
+PHOTOS.forEach((src, i) => {
+  const col = i % 2;
+  const d = document.createElement('div');
+  d.className = 'photo-item';
+  const img = document.createElement('img');
+  img.src = src.thumb;
+  img.loading = 'lazy';
+  img.decoding = 'async';
+  img.alt = '';
+  // fall back to placeholder if real thumbnails aren't deployed
+  img.onerror = function(){ this.src = 'fuh.png'; this.onerror = null; };
+  d.appendChild(img);
+  d.addEventListener('click', () => showPhoto(i));
+  cols[col].appendChild(d);
+});
+
+// ── LIGHTBOX ──
+const lb = document.getElementById('lb');
+const lbImg = document.getElementById('lb-img');
+const lbCount = document.getElementById('lb-count');
+let currentIdx = 0;
+
+function showPhoto(i){
+  currentIdx = (i + PHOTOS.length) % PHOTOS.length;
+  const p = PHOTOS[currentIdx];
+  lbImg.src = p.full;
+  lbImg.onerror = function(){ this.src = 'fuh.png'; this.onerror = null; };
+  lbCount.textContent = (currentIdx+1) + ' / ' + PHOTOS.length;
+  lb.classList.add('on');
+  lb.setAttribute('aria-hidden','false');
+  document.body.style.overflow = 'hidden';
+}
+function closePhoto(){
+  lb.classList.remove('on');
+  lb.setAttribute('aria-hidden','true');
+  document.body.style.overflow = '';
+}
+function nextPhoto(){ showPhoto(currentIdx + 1); }
+function prevPhoto(){ showPhoto(currentIdx - 1); }
+
+document.getElementById('lb-x').addEventListener('click', closePhoto);
+document.getElementById('lb-prev').addEventListener('click', prevPhoto);
+document.getElementById('lb-next').addEventListener('click', nextPhoto);
+
+// swipe gesture
+let touchX = null, touchY = null;
+document.getElementById('lb-stage').addEventListener('touchstart', (e) => {
+  if(e.touches.length !== 1) return;
+  touchX = e.touches[0].clientX;
+  touchY = e.touches[0].clientY;
+}, {passive: true});
+document.getElementById('lb-stage').addEventListener('touchend', (e) => {
+  if(touchX === null) return;
+  const t = e.changedTouches[0];
+  const dx = t.clientX - touchX;
+  const dy = t.clientY - touchY;
+  if(Math.abs(dx) > 50 && Math.abs(dx) > Math.abs(dy)){
+    if(dx < 0) nextPhoto(); else prevPhoto();
+  } else if(dy > 80 && Math.abs(dy) > Math.abs(dx)){
+    closePhoto();
+  }
+  touchX = touchY = null;
+}, {passive: true});
+
+document.addEventListener('keydown', (e) => {
+  if(!lb.classList.contains('on')) return;
+  if(e.key === 'Escape') closePhoto();
+  if(e.key === 'ArrowLeft') prevPhoto();
+  if(e.key === 'ArrowRight' || e.key === ' '){ e.preventDefault(); nextPhoto(); }
+});
+</script>
+</body>
+</html>
